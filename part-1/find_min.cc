@@ -1,5 +1,15 @@
+// Yamato Eguchi
+// CPSC 120-01
+// 2021-03-20
+// yamatoe1227@csu.fullerton.edu
+// @yamatoeguchi
+//
+// Lab 06-01
+//
+// This is my find minimunm assignment
+//
 
-// TODO: Add the following header files algorithm, array, cstdlib,
+// Add the following header files algorithm, array, cstdlib,
 // iostream, random
 
 #include <algorithm>
@@ -79,7 +89,7 @@ const int number_elements = 10;
 /// \param message The programmer defined string that specifies the current
 /// error.
 void ErrorMessage(const string& message) {
-  // TODO: implement ErrorMessage
+  // implement ErrorMessage
   cout << message << "\n";
   cout << "There was an error. Exiting.\n";
 }
@@ -108,7 +118,7 @@ void ErrorMessage(const string& message) {
 ///
 /// \param the_array This is the array of integers created in the main function.
 void PrintArray(const array<int, number_elements>& the_array) {
-  // TODO: Implement the function such that it prints out each element of
+  // Implement the function such that it prints out each element of
   // the given array, one element per line.
   for (const auto& elements : the_array) {
     cout << elements << "\n";
@@ -127,7 +137,7 @@ void PrintArray(const array<int, number_elements>& the_array) {
 /// \sa RandomNumberGenerator::next()
 void FillArray(array<int, number_elements>& the_array,
                RandomNumberGenerator& random_number_generator) {
-  // TODO: assign a random number to each element in the array using
+  // assign a random number to each element in the array using
   // random_number_generator.next().
   
   for (int index = 0; index < the_array.size(); index++) {
@@ -160,7 +170,7 @@ void FillArray(array<int, number_elements>& the_array,
 ///
 /// \returns The minimum/smallest value in the array
 int FindMinimum(const array<int, number_elements>& the_array) {
-  // TODO: Find the minimum value in the array.
+  // Find the minimum value in the array.
   int the_minimum = 0;
   try{
     the_minimum = the_array.at(0);
@@ -191,7 +201,7 @@ int main(int argc, char* argv[]) {
   string argv_two_maximum = string(argv[2]);
   int minimum_number = 0;
   int maximum_number = 0;
-  // TODO: convert argv_one_minimum and argv_two_maximum to integers and
+  // convert argv_one_minimum and argv_two_maximum to integers and
   // assign to minimum_number and maximum_number.
   try {
     minimum_number = stoi(argv_one_minimum);
@@ -201,7 +211,7 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
-  // TODO: Check to make sure minimum_number is less than maximum_number,
+  // Check to make sure minimum_number is less than maximum_number,
   // and that both of them are greater than zero. Otherwise, print an 
   // error message and exit.
   if (minimum_number >= maximum_number || minimum_number <= 0 || maximum_number <= 0) {
