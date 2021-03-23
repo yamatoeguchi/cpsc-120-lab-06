@@ -1,6 +1,21 @@
+// Yamato Eguchi
+// CPSC 120-01
+// 2021-03-20
+// yamatoe1227@csu.fullerton.edu
+// @yamatoeguchi
+//
+// Lab 06-02
+//
+// This is my calc_average assignment
+//
 
-// TODO: Add the following header files algorithm, array, cstdlib,
+// Add the following header files algorithm, array, cstdlib,
 // iostream, random
+#include<algorithm>
+#include<array>
+#include<cstdlib>
+#include<iostream>
+#include<random>
 
 using namespace std;
 
@@ -73,7 +88,9 @@ const int number_elements = 10;
 /// \param message The programmer defined string that specifies the current
 /// error.
 void ErrorMessage(const string& message) {
-  // TODO: implement ErrorMessage
+  // implement ErrorMessage
+  cout << message << "\n";
+  cout << "There was an error. Exiting.\n";
 }
 
 /// PrintArray print out the elements of \p the_array each on a line of
@@ -100,10 +117,13 @@ void ErrorMessage(const string& message) {
 ///
 /// \param the_array This is the array of integers created in the main function.
 void PrintArray(const array<int, number_elements>& the_array) {
-  // TODO: Implement the function such that it prints out each element of
+  // Implement the function such that it prints out each element of
   // the given array, one element per line.
   // You must use a range-for loop.
-}
+  for (const auto& elements : the_array) {
+    cout << elements << "\n";
+  }
+} 
 
 /// FillArray filles \p the_array with random numbers given by
 /// \p random_number_generator. _Must be done with a range-based for loop._
@@ -117,9 +137,12 @@ void PrintArray(const array<int, number_elements>& the_array) {
 /// \sa RandomNumberGenerator::next()
 void FillArray(array<int, number_elements>& the_array,
                RandomNumberGenerator& random_number_generator) {
-  // TODO: assign a random number to each element in the array using
+  // assign a random number to each element in the array using
   // random_number_generator.next().
   // You must use a range-for loop
+  for (auto& element : the_array) {
+    element = random_number_generator.next();
+  }
 }
 
 /// CalculateAverage calculates the average (arithmetic mean) of all the
@@ -138,7 +161,19 @@ void FillArray(array<int, number_elements>& the_array,
 ///
 /// \returns The average (arithmetic mean) value in the array as a float
 float CalculateAverage(const array<int, number_elements>& the_array) {
-  // TODO: Calculate the average of the values contained in the array
+  // Calculate the average of the values contained in the array
+  float sum = 0.0;
+  float average = 0.0;
+  for(const auto& element : the_array) {
+    try {
+      sum = sum + element;
+      average = sum / the_array.size();
+    } catch (const exception& e) {
+      ErrorMessage("Problem calculating average.");
+      exit(1);
+    }
+  }
+  return average;
 }
 
 /// Entry point to the find_min program
@@ -156,12 +191,24 @@ int main(int argc, char* argv[]) {
   string argv_two_maximum = string(argv[2]);
   int minimum_number = 0;
   int maximum_number = 0;
-  // TODO: convert argv_one_minimum and argv_two_maximum to integers and
+  // convert argv_one_minimum and argv_two_maximum to integers and
   // assign to minimum_number and maximum_number.
+  try {
+    minimum_number = stoi(argv_one_minimum);
+    maximum_number = stoi(argv_two_maximum);
+  } catch (const exception& e) {
+    ErrorMessage("Error converting string to integer.");
+    exit(1);
+  }
+   
 
-  // TODO: Check to make sure minimum_number is less than maximum_number,
+  // Check to make sure minimum_number is less than maximum_number,
   // and that both of them are greater than zero. Otherwise, print an 
   // error message an exit.
+  if (minimum_number >= maximum_number || minimum_number <= 0 || maximum_number <= 0) {
+    ErrorMessage("Minimum number must be less than the maximum number and both minimum and maximum numbers must be greater than 0.");
+    exit(1);
+  }
 
   RandomNumberGenerator rng(minimum_number, maximum_number);
   array<int, number_elements> random_numbers{};
